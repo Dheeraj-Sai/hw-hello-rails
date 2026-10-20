@@ -1,0 +1,42 @@
+# Ignore bundled gems
+/vendor/bundle
+
+# Ignore the default SQLite database
+/storage/*.sqlite3
+/storage/*.sqlite3-*
+
+# Ignore all log files and tempfiles
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pidfiles
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# Ignore storage files
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+
+# Ignore master key for security
+/config/master.key
+
+# Ignore node modules
+/node_modules
+
+# Ignore precompiled assets
+/public/assets
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
