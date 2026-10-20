@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="movie-details">
+  <h2>Details about <em><%= @movie.title %></em></h2>
+
+  <ul>
+    <li>
+      <strong>Rating:</strong>
+      <%= @movie.rating %>
+    </li>
+    <li>
+      <strong>Released on:</strong>
+      <%= @movie.release_date.strftime("%B %d, %Y") if @movie.release_date %>
+    </li>
+  </ul>
+
+  <h3>Description:</h3>
+  <p><%= @movie.description %></p>
+
+  <div class="actions">
+    <%= link_to "Edit info", edit_movie_path(@movie) %> |
+    <%= link_to "Back to movie list", movies_path %>
+    <br><br>
+    <%= button_to "Delete movie", @movie, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>
