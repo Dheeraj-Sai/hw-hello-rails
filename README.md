@@ -1,7 +1,6 @@
 # RottenPotatoes (Hello Rails)
 
-**Deployed Application:** [https://YOUR_APP_NAME.onrender.com](https://YOUR_APP_NAME.onrender.com)
-*(Replace the link above with your live deployed URL once deployed)*
+**Deployed Application:** [https://rottenpotatoes-dheeraj.onrender.com](https://rottenpotatoes-dheeraj.onrender.com)
 
 ---
 
