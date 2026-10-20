@@ -9,12 +9,12 @@ class MoviesController < ApplicationController
     # Update session if explicit sort parameter is provided
     if params[:sort_by].present? && ALLOWED_SORT_COLUMNS.include?(params[:sort_by])
       session[:sort_by] = params[:sort_by]
-      session[:sort_direction] = ALLOWED_DIRECTIONS.include?(params[:direction]) ? params[:direction] : 'asc'
+      session[:sort_direction] = ALLOWED_DIRECTIONS.include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     # Retrieve sort settings from session
     @sort_by = session[:sort_by]
-    @sort_direction = session[:sort_direction] || 'asc'
+    @sort_direction = session[:sort_direction] || "asc"
 
     if @sort_by.present? && ALLOWED_SORT_COLUMNS.include?(@sort_by)
       @movies = Movie.order(@sort_by.to_sym => @sort_direction.to_sym)
