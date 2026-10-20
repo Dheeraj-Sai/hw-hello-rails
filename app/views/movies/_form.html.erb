@@ -1,8 +1,7 @@
-<%= form_with(model: movie) do |form| %>
+<%= form_with(model: movie, local: true) do |form| %>
   <% if movie.errors.any? %>
-    <div style="color: red">
+    <div class="errors-box">
       <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
-
       <ul>
         <% movie.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,27 +10,28 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title, required: true %>
+  <div class="form-group">
+    <%= form.label :title, "Title" %>
+    <%= form.text_field :title, class: "form-control", required: true, placeholder: "e.g. Star Wars" %>
   </div>
 
-  <div>
-    <%= form.label :rating, style: "display: block" %>
-    <%= form.select :rating, ['G', 'PG', 'PG-13', 'R', 'NC-17'], prompt: 'Select a rating' %>
+  <div class="form-group">
+    <%= form.label :rating, "Rating" %>
+    <%= form.select :rating, ['G', 'PG', 'PG-13', 'R', 'NC-17'], { prompt: 'Select a rating' }, { class: "form-control", required: true } %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description, rows: 4 %>
+  <div class="form-group">
+    <%= form.label :release_date, "Released On" %>
+    <%= form.date_field :release_date, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :release_date, style: "display: block" %>
-    <%= form.date_field :release_date %>
+  <div class="form-group">
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description, class: "form-control", rows: 4, placeholder: "Brief summary of the movie..." %>
   </div>
 
-  <div style="margin-top: 15px;">
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit class: "button" %>
+    <%= link_to "Cancel", movies_path, class: "button button-secondary" %>
   </div>
 <% end %>
