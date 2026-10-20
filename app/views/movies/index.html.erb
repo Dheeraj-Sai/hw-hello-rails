@@ -4,29 +4,45 @@
 
 <h1>All Movies</h1>
 
-<table>
+<table id="movies">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Rating</th>
-      <th>Release Date</th>
+      <%= sortable_header('title', 'Movie Title') %>
+      <%= sortable_header('rating', 'Rating') %>
+      <%= sortable_header('release_date', 'Release Date') %>
       <th>More Info</th>
     </tr>
   </thead>
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie.title %></td>
-        <td><%= movie.rating %></td>
-        <td><%= movie.release_date.strftime("%B %d, %Y") if movie.release_date %></td>
+        <td class="<%= column_cell_class('title') %>">
+          <%= movie.title %>
+        </td>
+        <td class="<%= column_cell_class('rating') %>">
+          <%= movie.rating %>
+        </td>
+        <td class="<%= column_cell_class('release_date') %>">
+          <%= movie.release_date.strftime("%B %d, %Y") if movie.release_date %>
+        </td>
         <td>
           <%= link_to "More about #{movie.title}", movie_path(movie) %>
         </td>
       </tr>
     <% end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        Total Movies: <%= @movies.count %>
+        <% if @sort_by.present? %>
+          | Sorted by <strong><%= @sort_by.humanize %></strong> (<%= @sort_direction.upcase %>)
+        <% end %>
+      </td>
+    </tr>
+  </tfoot>
 </table>
 
 <br>
 
-<%= link_to "Add new movie", new_movie_path %>
+<%= link_to "Add new movie", new_movie_path, class: "button" %>

@@ -1,9 +1,26 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
 
+  ALLOWED_SORT_COLUMNS = %w[title rating release_date].freeze
+  ALLOWED_DIRECTIONS = %w[asc desc].freeze
+
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    # Update session if explicit sort parameter is provided
+    if params[:sort_by].present? && ALLOWED_SORT_COLUMNS.include?(params[:sort_by])
+      session[:sort_by] = params[:sort_by]
+      session[:sort_direction] = ALLOWED_DIRECTIONS.include?(params[:direction]) ? params[:direction] : 'asc'
+    end
+
+    # Retrieve sort settings from session
+    @sort_by = session[:sort_by]
+    @sort_direction = session[:sort_direction] || 'asc'
+
+    if @sort_by.present? && ALLOWED_SORT_COLUMNS.include?(@sort_by)
+      @movies = Movie.order(@sort_by.to_sym => @sort_direction.to_sym)
+    else
+      @movies = Movie.all
+    end
   end
 
   # GET /movies/1 or /movies/1.json
